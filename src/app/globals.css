@@ -1,1 +1,260 @@
 @import "tailwindcss";
+
+/* ═══════════════════════════════════════════
+   Base
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: #010407;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   Navigation
+═══════════════════════════════════════════ */
+.nav-link {
+  font-size: 0.68rem;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.46);
+  text-decoration: none;
+  transition: color 0.35s ease;
+}
+.nav-link:hover {
+  color: rgba(255, 255, 255, 0.90);
+}
+
+.nav-cta {
+  padding: 0.58rem 1.55rem;
+  font-size: 0.64rem;
+  font-weight: 300;
+  letter-spacing: 0.20em;
+  color: rgba(148, 202, 255, 0.82);
+  background: transparent;
+  border: 1px solid rgba(60, 135, 255, 0.20);
+  cursor: pointer;
+  transition: color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.nav-cta:hover {
+  color: #fff;
+  border-color: rgba(85, 160, 255, 0.52);
+  box-shadow:
+    0 0 28px rgba(50, 120, 255, 0.20),
+    inset 0 0 20px rgba(50, 120, 255, 0.06);
+}
+
+/* ═══════════════════════════════════════════
+   Hero typography
+═══════════════════════════════════════════ */
+.hero-eyebrow {
+  font-size: 0.60rem;
+  font-weight: 300;
+  letter-spacing: 0.40em;
+  color: rgba(70, 140, 220, 0.58);
+  text-transform: uppercase;
+}
+
+.hero-main-copy {
+  font-family: var(--font-noto, var(--font-inter, sans-serif));
+  font-size: clamp(2.2rem, 4.0vw, 3.4rem);
+  font-weight: 200;
+  letter-spacing: 0.04em;
+  line-height: 1.70;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.hero-desc {
+  font-size: clamp(0.76rem, 1.08vw, 0.86rem);
+  font-weight: 300;
+  letter-spacing: 0.07em;
+  line-height: 2.35;
+  color: rgba(255, 255, 255, 0.34);
+}
+
+/* ═══════════════════════════════════════════
+   Scroll indicator
+═══════════════════════════════════════════ */
+.scroll-label {
+  font-size: 0.57rem;
+  font-weight: 300;
+  letter-spacing: 0.36em;
+  color: rgba(85, 155, 255, 0.50);
+  text-transform: uppercase;
+}
+
+.scroll-bar {
+  width: 1px;
+  height: 38px;
+  background: linear-gradient(to bottom, rgba(75, 148, 255, 0.55), transparent);
+  transform-origin: top;
+}
+
+/* ═══════════════════════════════════════════
+   Logo ambient halo
+═══════════════════════════════════════════ */
+.logo-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(50, 118, 255, 0.20) 0%,
+    rgba(25, 70, 195, 0.07) 50%,
+    transparent 78%
+  );
+  filter: blur(30px);
+  animation: halo-pulse 4.0s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes halo-pulse {
+  0%, 100% { opacity: 0.68; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 1;    transform: translate(-50%, -50%) scale(1.06); }
+}
+
+/* ═══════════════════════════════════════════
+   Blue light effects — right panel
+═══════════════════════════════════════════ */
+
+/* Wide gaussian beam */
+.light-beam {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 56%;
+  background: linear-gradient(to bottom,
+    rgba(50, 118, 255, 0.55) 0%,
+    rgba(32, 85, 220, 0.20) 38%,
+    rgba(16, 52, 182, 0.05) 72%,
+    transparent 100%
+  );
+  filter: blur(26px);
+  animation: beam-pulse 4.4s ease-in-out infinite;
+}
+
+/* Thin glowing ray — the core line */
+.light-ray {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 53%;
+  background: linear-gradient(to bottom,
+    rgba(115, 188, 255, 0.88) 0%,
+    rgba(75, 148, 255, 0.42) 44%,
+    rgba(45, 105, 218, 0.10) 78%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0  5px rgba(95,  172, 255, 0.72),
+    0 0 14px rgba(65,  140, 255, 0.36);
+  animation: beam-pulse 4.4s ease-in-out infinite;
+}
+
+@keyframes beam-pulse {
+  0%, 100% { opacity: 0.62; }
+  50%       { opacity: 1;    }
+}
+
+/* Horizon atmospheric glow */
+.light-horizon {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 46%;
+  background: radial-gradient(ellipse at 50% 108%,
+    rgba(20, 62, 192, 0.28) 0%,
+    rgba(11, 40, 144, 0.10) 36%,
+    rgba(6,  22,  92, 0.03) 58%,
+    transparent 78%
+  );
+}
+
+/* Central radial glow around logo area */
+.light-radial {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 680px;
+  height: 680px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(38, 100, 240, 0.12) 0%,
+    rgba(20, 64, 192, 0.05) 42%,
+    transparent 70%
+  );
+  filter: blur(42px);
+}
+
+/* ═══════════════════════════════════════════
+   Nav cards (Part 2 — kept for later)
+═══════════════════════════════════════════ */
+.section-label {
+  font-size: 0.66rem;
+  font-weight: 300;
+  letter-spacing: 0.48em;
+  color: rgba(85, 145, 210, 0.46);
+  text-transform: uppercase;
+}
+
+.nav-card {
+  padding: 2rem 1.75rem;
+  border: 1px solid rgba(65, 135, 220, 0.08);
+  background: rgba(255, 255, 255, 0.020);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.nav-card:hover {
+  background: rgba(255, 255, 255, 0.040);
+  border-color: rgba(75, 150, 255, 0.18);
+  box-shadow: 0 0 26px rgba(50, 115, 255, 0.08), 0 22px 50px rgba(0, 0, 0, 0.55);
+}
+.nav-card-symbol {
+  display: block;
+  font-size: 1.30rem;
+  color: rgba(85, 160, 255, 0.46);
+  margin-bottom: 1.1rem;
+  transition: color 0.3s ease;
+}
+.nav-card:hover .nav-card-symbol { color: rgba(115, 185, 255, 0.80); }
+.nav-card-title {
+  font-size: 0.96rem;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.84);
+  margin-bottom: 0.52rem;
+}
+.nav-card-desc {
+  font-size: 0.68rem;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.28);
+  line-height: 1.75;
+}
+.nav-card-line {
+  width: 20px;
+  height: 1px;
+  background: rgba(70, 140, 255, 0.20);
+  margin-top: 1.3rem;
+  transition: width 0.45s ease, background 0.45s ease;
+}
+.nav-card:hover .nav-card-line { width: 44px; background: rgba(95, 168, 255, 0.50); }
+
+/* ═══════════════════════════════════════════
+   Footer
+═══════════════════════════════════════════ */
+.footer-line {
+  font-size: clamp(0.80rem, 1.9vw, 0.92rem);
+  font-weight: 200;
+  letter-spacing: 0.32em;
+  color: rgba(255, 255, 255, 0.13);
+}
