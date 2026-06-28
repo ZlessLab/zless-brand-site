@@ -23,9 +23,7 @@ body {
   text-decoration: none;
   transition: color 0.35s ease;
 }
-.nav-link:hover {
-  color: rgba(255, 255, 255, 0.90);
-}
+.nav-link:hover { color: rgba(255, 255, 255, 0.90); }
 
 .nav-cta {
   padding: 0.58rem 1.55rem;
@@ -41,9 +39,7 @@ body {
 .nav-cta:hover {
   color: #fff;
   border-color: rgba(85, 160, 255, 0.52);
-  box-shadow:
-    0 0 28px rgba(50, 120, 255, 0.20),
-    inset 0 0 20px rgba(50, 120, 255, 0.06);
+  box-shadow: 0 0 28px rgba(50, 120, 255, 0.20), inset 0 0 20px rgba(50, 120, 255, 0.06);
 }
 
 /* ═══════════════════════════════════════════
@@ -57,13 +53,19 @@ body {
   text-transform: uppercase;
 }
 
+/* Mobile-first: smaller clamp, desktop overrides */
 .hero-main-copy {
   font-family: var(--font-noto, var(--font-inter, sans-serif));
-  font-size: clamp(2.2rem, 4.0vw, 3.4rem);
+  font-size: clamp(1.65rem, 7.5vw, 2.2rem);
   font-weight: 200;
   letter-spacing: 0.04em;
   line-height: 1.70;
   color: rgba(255, 255, 255, 0.96);
+}
+@media (min-width: 768px) {
+  .hero-main-copy {
+    font-size: clamp(2.2rem, 4.0vw, 3.4rem);
+  }
 }
 
 .hero-desc {
@@ -97,11 +99,9 @@ body {
 ═══════════════════════════════════════════ */
 .logo-halo {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 520px;
-  height: 520px;
+  width: 520px; height: 520px;
   border-radius: 50%;
   background: radial-gradient(circle,
     rgba(50, 118, 255, 0.20) 0%,
@@ -120,15 +120,11 @@ body {
 /* ═══════════════════════════════════════════
    Blue light effects — right panel
 ═══════════════════════════════════════════ */
-
-/* Wide gaussian beam */
 .light-beam {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translateX(-50%);
-  width: 200px;
-  height: 56%;
+  width: 200px; height: 56%;
   background: linear-gradient(to bottom,
     rgba(50, 118, 255, 0.55) 0%,
     rgba(32, 85, 220, 0.20) 38%,
@@ -139,52 +135,42 @@ body {
   animation: beam-pulse 4.4s ease-in-out infinite;
 }
 
-/* Thin glowing ray — the core line */
 .light-ray {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translateX(-50%);
-  width: 1px;
-  height: 53%;
+  width: 1px; height: 53%;
   background: linear-gradient(to bottom,
     rgba(115, 188, 255, 0.88) 0%,
     rgba(75, 148, 255, 0.42) 44%,
     rgba(45, 105, 218, 0.10) 78%,
     transparent 100%
   );
-  box-shadow:
-    0 0  5px rgba(95,  172, 255, 0.72),
-    0 0 14px rgba(65,  140, 255, 0.36);
+  box-shadow: 0 0 5px rgba(95, 172, 255, 0.72), 0 0 14px rgba(65, 140, 255, 0.36);
   animation: beam-pulse 4.4s ease-in-out infinite;
 }
 
 @keyframes beam-pulse {
   0%, 100% { opacity: 0.62; }
-  50%       { opacity: 1;    }
+  50%       { opacity: 1; }
 }
 
-/* Horizon atmospheric glow */
 .light-horizon {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 46%;
+  bottom: 0; left: 0; right: 0; height: 46%;
   background: radial-gradient(ellipse at 50% 108%,
     rgba(20, 62, 192, 0.28) 0%,
     rgba(11, 40, 144, 0.10) 36%,
-    rgba(6,  22,  92, 0.03) 58%,
+    rgba(6, 22, 92, 0.03) 58%,
     transparent 78%
   );
 }
 
-/* Central radial glow around logo area */
 .light-radial {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 680px;
-  height: 680px;
+  width: 680px; height: 680px;
   border-radius: 50%;
   background: radial-gradient(circle,
     rgba(38, 100, 240, 0.12) 0%,
@@ -195,16 +181,80 @@ body {
 }
 
 /* ═══════════════════════════════════════════
-   Nav cards (Part 2 — kept for later)
+   Section label (shared)
 ═══════════════════════════════════════════ */
 .section-label {
-  font-size: 0.66rem;
+  font-size: 0.62rem;
   font-weight: 300;
   letter-spacing: 0.48em;
   color: rgba(85, 145, 210, 0.46);
   text-transform: uppercase;
 }
 
+/* ═══════════════════════════════════════════
+   Product card
+═══════════════════════════════════════════ */
+.product-card {
+  padding: 2rem 1.75rem;
+  border: 1px solid rgba(65, 135, 220, 0.10);
+  background: rgba(255, 255, 255, 0.018);
+  border-radius: 16px;
+  transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.product-card:hover {
+  background: rgba(255, 255, 255, 0.032);
+  border-color: rgba(75, 150, 255, 0.18);
+  box-shadow: 0 0 40px rgba(50, 115, 255, 0.07), 0 20px 48px rgba(0, 0, 0, 0.45);
+}
+
+.product-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.62rem 1.2rem;
+  font-size: 0.72rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: rgba(148, 202, 255, 0.75);
+  border: 1px solid rgba(60, 130, 255, 0.22);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: color 0.3s, border-color 0.3s, box-shadow 0.3s;
+  cursor: default;
+  opacity: 0.6;
+}
+
+.product-btn-badge {
+  font-size: 0.54rem;
+  letter-spacing: 0.10em;
+  color: rgba(245, 166, 35, 0.75);
+  border: 1px solid rgba(245, 166, 35, 0.25);
+  border-radius: 3px;
+  padding: 1px 5px;
+  margin-left: 2px;
+}
+
+.product-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.62rem 1.2rem;
+  font-size: 0.72rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: color 0.3s, border-color 0.3s;
+}
+.product-btn-secondary:hover {
+  color: rgba(255, 255, 255, 0.75);
+  border-color: rgba(255, 255, 255, 0.20);
+}
+
+/* ═══════════════════════════════════════════
+   Nav cards (legacy — kept for reference)
+═══════════════════════════════════════════ */
 .nav-card {
   padding: 2rem 1.75rem;
   border: 1px solid rgba(65, 135, 220, 0.08);
@@ -241,8 +291,7 @@ body {
   line-height: 1.75;
 }
 .nav-card-line {
-  width: 20px;
-  height: 1px;
+  width: 20px; height: 1px;
   background: rgba(70, 140, 255, 0.20);
   margin-top: 1.3rem;
   transition: width 0.45s ease, background 0.45s ease;
@@ -253,8 +302,18 @@ body {
    Footer
 ═══════════════════════════════════════════ */
 .footer-line {
-  font-size: clamp(0.80rem, 1.9vw, 0.92rem);
+  font-size: clamp(0.66rem, 1.9vw, 0.76rem);
   font-weight: 200;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.28em;
   color: rgba(255, 255, 255, 0.13);
 }
+
+.footer-nav-link {
+  font-size: 0.62rem;
+  font-weight: 300;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.25);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer-nav-link:hover { color: rgba(255, 255, 255, 0.65); }

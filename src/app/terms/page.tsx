@@ -27,7 +27,7 @@ function TermsSection({
         {title}
       </h2>
       <div className="w-8 h-px bg-[rgba(60,120,255,0.30)] mb-6" />
-      <div className="text-[0.84rem] font-light leading-[2.1] tracking-[0.04em] text-white/50 space-y-4">
+      <div className="text-[0.84rem] font-light leading-[2.1] tracking-[0.04em] text-white/62 space-y-4">
         {children}
       </div>
     </section>
