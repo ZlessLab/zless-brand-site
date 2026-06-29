@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { BrandHome } from "@/components/home/BrandHome";
 import { OpeningThreeStage } from "./OpeningThreeStage";
 
 const OPENING_DURATION_SECONDS = 8;
@@ -15,8 +16,10 @@ const smoothstep = (edge0: number, edge1: number, value: number) => {
 export function OpeningExperience() {
   const progressRef = useRef(0);
   const [progress, setProgress] = useState(0);
+  const [complete, setComplete] = useState(false);
 
   useEffect(() => {
+    document.body.style.overflow = "hidden";
     const driver = { value: 0 };
     const tween = gsap.to(driver, {
       value: 1,
@@ -29,19 +32,22 @@ export function OpeningExperience() {
       onComplete: () => {
         progressRef.current = 1;
         setProgress(1);
+        setComplete(true);
+        document.body.style.overflow = "";
       },
     });
 
     return () => {
       tween.kill();
+      document.body.style.overflow = "";
     };
   }, []);
 
   const copyProgress = smoothstep(0.68, 0.88, progress);
 
   return (
-    <main className="opening-page">
-      <div className="opening-stage">
+    <div className={`site-shell ${complete ? "is-open" : ""}`}>
+      <div className="opening-page" aria-hidden={complete}>
         <OpeningThreeStage progressRef={progressRef} />
         <div className="opening-vignette" />
         <section
@@ -57,6 +63,7 @@ export function OpeningExperience() {
           <span>ゼロから、新しい価値を創る。</span>
         </section>
       </div>
-    </main>
+      <BrandHome />
+    </div>
   );
 }
