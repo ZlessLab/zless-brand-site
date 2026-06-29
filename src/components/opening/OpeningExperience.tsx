@@ -1,50 +1,61 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
-import { useOpeningScroll } from "@/hooks/useOpeningScroll";
-import { getOpeningSceneIndex, OPENING_SCENES } from "@/scene/openingScenes";
-import { OpeningHeader } from "./OpeningHeader";
-import { OpeningLogo } from "./OpeningLogo";
-import { OpeningNarrative } from "./OpeningNarrative";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import { OpeningThreeStage } from "./OpeningThreeStage";
 
-export function OpeningExperience() {
-  const rootRef = useRef<HTMLElement | null>(null);
-  const progressRef = useRef(0);
-  const [activeIndex, setActiveIndex] = useState(0);
+const OPENING_DURATION_SECONDS = 8;
 
-  const handleProgress = useCallback((progress: number) => {
-    progressRef.current = progress;
-    setActiveIndex(getOpeningSceneIndex(progress));
+const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
+const smoothstep = (edge0: number, edge1: number, value: number) => {
+  const x = clamp01((value - edge0) / (edge1 - edge0));
+  return x * x * (3 - 2 * x);
+};
+
+export function OpeningExperience() {
+  const progressRef = useRef(0);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const driver = { value: 0 };
+    const tween = gsap.to(driver, {
+      value: 1,
+      duration: OPENING_DURATION_SECONDS,
+      ease: "power1.inOut",
+      onUpdate: () => {
+        progressRef.current = driver.value;
+        setProgress(driver.value);
+      },
+      onComplete: () => {
+        progressRef.current = 1;
+        setProgress(1);
+      },
+    });
+
+    return () => {
+      tween.kill();
+    };
   }, []);
 
-  useOpeningScroll({ rootRef, onProgress: handleProgress });
+  const copyProgress = smoothstep(0.68, 0.88, progress);
 
   return (
-    <main ref={rootRef} className="opening-page">
-      <OpeningHeader />
+    <main className="opening-page">
       <div className="opening-stage">
         <OpeningThreeStage progressRef={progressRef} />
         <div className="opening-vignette" />
-        <OpeningNarrative activeIndex={activeIndex} />
-        <div className={`opening-mini-brand ${activeIndex === OPENING_SCENES.length - 1 ? "is-visible" : ""}`}>
-          <OpeningLogo className="opening-mini-mark" />
-          <span>Zless</span>
-        </div>
-        <div className={`opening-menu-lines ${activeIndex === OPENING_SCENES.length - 1 ? "is-visible" : ""}`} aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className="opening-scroll-cue">
-          <span>SCROLL</span>
-          <i />
-        </div>
-      </div>
-      <div className="opening-scroll-space" aria-hidden="true">
-        {OPENING_SCENES.map((scene) => (
-          <section key={scene.id} className="opening-scroll-chapter" />
-        ))}
+        <section
+          className="opening-statement"
+          style={{
+            opacity: copyProgress,
+            transform: `translate3d(-50%, ${18 - copyProgress * 18}px, 0)`,
+          }}
+          aria-label="Zless brand statement"
+        >
+          <p>Zero Limits.</p>
+          <p>Endless Success.</p>
+          <span>ゼロから、新しい価値を創る。</span>
+        </section>
       </div>
     </main>
   );
